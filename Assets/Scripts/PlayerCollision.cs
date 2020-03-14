@@ -15,6 +15,8 @@ public class PlayerCollision : MonoBehaviour {
 
     private void DeathSequence()
     {
+        //TODO Destroy ship
+        
         SendMessage("OnPlayerDeath");
         deathFx.SetActive(true);
         Invoke("ReloadScene", levelLoadDelay);
