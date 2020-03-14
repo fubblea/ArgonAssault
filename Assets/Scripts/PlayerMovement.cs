@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class Player : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
-	float xThrow;
+	[Header("X Throw")]
 	[Tooltip("In ms^-1")] [SerializeField] float xSpeed = 40f;
 	[SerializeField] float xRange = 9f;
 
-	float yThrow;
+	[Header("Y Throw")]
 	[Tooltip("In ms^-1")] [SerializeField] float ySpeed = 40f;
 	[SerializeField] float yRange = 5f;
 
+	[Header("Pitch Factors")]
 	[SerializeField] float positionPitchFactor = -1f;
 	[SerializeField] float throwPitchFactor = -25f;
 
+	[Header("Yaw Factors")]
 	[SerializeField] float postionYawFactor = 2.2f;
 
+	[Header("Roll Factors")]
 	[SerializeField] float throwRollFactor = -25f;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+	float xThrow, yThrow;
+	bool isAlive = true;
+
 
 	private void ProcessTranslation()
 	{
@@ -49,13 +51,21 @@ public class Player : MonoBehaviour {
 		transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
 	}
 
-	// Update is called once per frame
+	private void OnPlayerDeath() //Called by string reference
+	{
+		isAlive = false;
+	}
 	void Update () {
-		ProcessTranslation();
-		ProcessRotation();
+
+		if (isAlive)
+		{
+			ProcessTranslation();
+			ProcessRotation();
+		}
+		
 
 	}
 
-	
+
 
 }
