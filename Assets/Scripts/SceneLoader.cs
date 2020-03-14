@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 
-public class splashScreen : MonoBehaviour {
+public class SceneLoader : MonoBehaviour {
 
-	void Awake()
-	{
-		DontDestroyOnLoad(gameObject);
-	}
+	// Use this for initialization
 	void Start () {
 		Invoke("loadNextScene", 5);
 	}
+
 
 	void loadNextScene()
 	{
 		EditorSceneManager.LoadScene(EditorSceneManager.GetActiveScene().buildIndex + 1);
 	}
-	
 }
