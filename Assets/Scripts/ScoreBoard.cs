@@ -16,6 +16,7 @@ public class ScoreBoard : MonoBehaviour {
 
 	public void ScoreHit(int scorePerHit)
 	{
+		//Test
 		score = score + scorePerHit;
 		scoreText.text = score.ToString();
 	}
