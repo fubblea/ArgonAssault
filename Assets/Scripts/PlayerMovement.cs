@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour {
 	[Header("Roll Factors")]
 	[SerializeField] float throwRollFactor = -25f;
 
+	[SerializeField] GameObject[] guns;
+
 	float xThrow, yThrow;
 	bool isAlive = true;
 
@@ -51,6 +53,33 @@ public class PlayerMovement : MonoBehaviour {
 		transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
 	}
 
+	private void ProcessFiring()
+	{
+		if (CrossPlatformInputManager.GetButton("Fire"))
+		{
+			ActivateGuns();
+		}
+		else
+		{
+			DeactivateGuns();
+		}
+	}
+	private void ActivateGuns()
+	{
+		foreach(GameObject gun in guns)
+		{
+			gun.SetActive(true);
+		}
+	}
+
+	private void DeactivateGuns()
+	{
+		foreach (GameObject gun in guns)
+		{
+			gun.SetActive(false);
+		}
+	}
+
 	private void OnPlayerDeath() //Called by string reference
 	{
 		isAlive = false;
@@ -61,10 +90,13 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			ProcessTranslation();
 			ProcessRotation();
+			ProcessFiring();
 		}
 		
 
 	}
+
+
 
 
 
